@@ -1,0 +1,16 @@
+version: '3'
+services:
+  azure-vote-back:
+    image: redis
+    container_name: voting-app-backend
+    ports:
+        - "6379:6379"
+
+  azure-vote-front:
+    build: ./voting-app
+    image: pwang009/voting-app
+    container_name: voting-app-frontend
+    environment:
+      REDIS: voting-app-backend
+    ports:
+        - "7080:80"

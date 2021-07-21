@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-vote-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-vote-back
+  template:
+    metadata:
+      labels:
+        app: azure-vote-back
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: azure-vote-back
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-back
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: azure-vote-back
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-vote-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-vote-front
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5 
+  template:
+    metadata:
+      labels:
+        app: azure-vote-front
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: azure-vote-front
+        # image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+        image: pwang009/azure-vote-app:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+        env:
+        - name: REDIS
+          value: "azure-vote-back"
+        - name: title
+          value: "Vote App"
+        - name: value1
+          value: "Cat Only"
+        - name: value2
+          value: "Dog Only"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-front
+spec:
+  selector:
+    app: azure-vote-front
+  type: LoadBalancer
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 80
+--- 
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: azure-vote-frontend
+  labels:
+    helm.sh/chart: frontend-1.1.0
+    app.kubernetes.io/name: frontend
+    app.kubernetes.io/instance: azure-vote
+    app.kubernetes.io/version: "2.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  rules:
+    - host: "azure-vote.local"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: azure-vote-front
+              servicePort: 80
+---      
