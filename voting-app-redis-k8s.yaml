@@ -55,7 +55,7 @@ spec:
       containers:
       - name: azure-vote-front
         # image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
-        image: pwang009/azure-vote-app:latest
+        image: pwang009/voting-app:latest
         ports:
         - containerPort: 80
         resources:
