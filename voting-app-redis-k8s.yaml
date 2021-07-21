@@ -93,7 +93,7 @@ metadata:
   labels:
     helm.sh/chart: frontend-1.1.0
     app.kubernetes.io/name: frontend
-    app.kubernetes.io/instance: azure-vote
+    app.kubernetes.io/instance: azure-vote    
     app.kubernetes.io/version: "2.0"
     app.kubernetes.io/managed-by: Helm
 spec:
