@@ -14,7 +14,8 @@ ingress:
 replicaCount: 1
 
 image:
-  repository: microsoft/azure-vote-front
+  # repository: microsoft/azure-vote-front
+  repository: pwang009/voting-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
@@ -24,7 +25,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: ClusterIP
+  # type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 resources: 
