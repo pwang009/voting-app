@@ -7,6 +7,7 @@ pipeline {
     }
     agent any
     stages {
+    /*
         stage('Build and Push Image') {
             steps {
                 script {
@@ -17,10 +18,12 @@ pipeline {
                 }
             }
         }
+        */
         stage('Deploy to Kubernetes') {
             steps {
                 dir("$WORKSPACE") {
                 sh """
+                    #!/bin/bash
                     echo $USER
                     echo "Starting deployment"
                     export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
