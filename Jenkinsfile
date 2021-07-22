@@ -4,7 +4,7 @@ pipeline {
         DockerhubCred = 'Dockerhub'
         DockerhubBuildTag = 'pwang009/voting-app:latest'
         KubeDir = '/var/lib/jenkins'
-        branch = ${GIT_BRANCH.substring(0,6)
+        branch = ${GIT_BRANCH.substring(0,6)}
     }
     agent any
     stages {
