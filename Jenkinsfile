@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir("$WORKSPACE") {
                 sh """
-                    #!/bin/bash
+                    ## #!/bin/bash
                     echo $USER
                     echo "Starting deployment"
                     export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
@@ -31,7 +31,7 @@ pipeline {
                     ## /usr/local/bin/kubectl delete -f ./voting-app-redis-k8s.yaml
                     ## /usr/local/bin/kubectl apply -f ./voting-app-redis-k8s.yaml 
                     /usr/local/bin/helm uninstall voting-app 
-                    /usr/local/bin/helm install --replace voting-app ./helm  -f "./helm/mini.values.yaml"
+                    /usr/local/bin/helm install voting-app ./helm  -f "./helm/mini.values.yaml"
                    """
                 }
             }
