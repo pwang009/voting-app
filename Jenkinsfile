@@ -30,7 +30,7 @@ pipeline {
                     /usr/local/bin/kubectl config use-context mini@kubernetes 
                     ## /usr/local/bin/kubectl delete -f ./voting-app-redis-k8s.yaml
                     ## /usr/local/bin/kubectl apply -f ./voting-app-redis-k8s.yaml 
-                    /usr/local/bin/helm install voting-app ./helm  -f $WORKSPACE/helm/values.yaml 
+                    /usr/local/bin/helm install voting-app ./helm  -f "$WORKSPACE/helm/values.yaml"
                    """
                 }
             }
