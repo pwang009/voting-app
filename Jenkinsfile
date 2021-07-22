@@ -32,7 +32,7 @@ pipeline {
                     ## /usr/local/bin/kubectl delete -f ./voting-app-redis-k8s.yaml
                     ## /usr/local/bin/kubectl apply -f ./voting-app-redis-k8s.yaml 
                     /usr/local/bin/helm uninstall voting-app 
-                    /usr/local/bin/helm install voting-app ./helm  -f "./helm/mini.values.yaml"   
+                    /usr/local/bin/helm install voting-app ./helm  -f "./helm/mini.values.yaml"
                    """
                 }
             }
