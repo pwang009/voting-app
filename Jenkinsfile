@@ -25,7 +25,8 @@ pipeline {
                 sh """
                     #!/bin/bash
                     echo $USER
-                    branch = ${${env.GIT_BRANCH}##*/}
+                    b = ${env.GIT_BRANCH}
+                    branch = ${b##*/}
                     echo $branch
                     echo "Starting deployment"
                     ## export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
