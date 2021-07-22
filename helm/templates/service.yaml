@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: azure-vote-front
 spec:
+  type: LoadBalancer
   ports:
     - protocol: "TCP"
       port: 80
