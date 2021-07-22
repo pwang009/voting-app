@@ -4,6 +4,7 @@ pipeline {
         DockerhubCred = 'Dockerhub'
         DockerhubBuildTag = 'pwang009/voting-app:latest'
         KubeDir = '/var/lib/jenkins'
+        branch = ${GIT_BRANCH.substring(0,6)
     }
     agent any
     stages {
@@ -25,8 +26,7 @@ pipeline {
                 sh """
                     #!/bin/bash
                     echo $USER
-                    brch = `echo ${env.GIT_BRANCH} | cut -d / -f 2`
-                    echo $brch
+                    echo $branch
                     echo "Starting deployment"
                     ## export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
                     ## /usr/local/bin/kubectl config use-context mini@kubernetes 
