@@ -25,10 +25,8 @@ pipeline {
                 sh """
                     #!/bin/bash
                     echo $USER
-                    brch = ${env.GIT_BRANCH}
+                    brch = `echo ${env.GIT_BRANCH} | cut -d / -f 2`
                     echo $brch
-                    ## branch = ${brch##*/}
-                    ## echo $branch
                     echo "Starting deployment"
                     ## export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
                     ## /usr/local/bin/kubectl config use-context mini@kubernetes 
