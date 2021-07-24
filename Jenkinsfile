@@ -8,7 +8,6 @@ pipeline {
     }
     agent any
     stages {
-    /*
         stage('Build and Push Image') {
             steps {
                 script {
@@ -19,7 +18,6 @@ pipeline {
                 }
             }
         }
-        */
         stage('Deploy to Kubernetes') {
             steps {
                 dir("$WORKSPACE") {
