@@ -28,10 +28,14 @@ pipeline {
                     ## export KUBECONFIG=$KubeDir/.kube/local:$KubeDir/.kube/mini
                     export KUBECONFIG=$KubeDir/.kube/${branch}
                     /usr/local/bin/kubectl config use-context ${branch}@kubernetes 
+                    ## mini deployment ##
                     ## /usr/local/bin/kubectl delete -f ./voting-app-redis-k8s.yaml
-                    ## /usr/local/bin/kubectl apply -f ./voting-app-redis-k8s.yaml 
+                    ## /usr/local/bin/kubectl apply -f ./voting-app-redis-k8s.yaml
+                    ## ######
+                    ## local cluster deployment ##
                     /usr/local/bin/helm uninstall voting-app 
-                    /usr/local/bin/helm install voting-app ./helm  -f ./helm/${branch}.values.yaml -f ./helm/values.yaml
+                    ## /usr/local/bin/helm install voting-app ./helm  -f ./helm/${branch}.values.yaml -f ./helm/values.yaml
+                    ## ######
                    """
                 }
             }
